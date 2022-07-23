@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">APP Produtos</string>
+    <string name="label_main_title">Lista de produtos</string>
+    <string name="label_new_product">Novo produto</string>
+    <string name="label_name">Nome</string>
+    <string name="label_price">Preço</string>
+</resources>

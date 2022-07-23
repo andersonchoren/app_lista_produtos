@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">APP Produtos</string>
+    <string name="label_main_title">Product List</string>
+    <string name="label_new_product">New Product</string>
+    <string name="label_name">Name </string>
+    <string name="label_price">Price </string>
+</resources>
