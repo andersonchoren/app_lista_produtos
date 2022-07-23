@@ -1,16 +1,13 @@
 package br.com.andersonchoren.revisao
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.andersonchoren.revisao.client.ProductClientAPI
 import br.com.andersonchoren.revisao.databinding.ActivityMainBinding
-import br.com.andersonchoren.revisao.model.Product
 import br.com.andersonchoren.revisao.model.ProductAdapter
-import com.google.android.material.snackbar.Snackbar
+import br.com.andersonchoren.revisao.repository.ProductRepository
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
@@ -23,25 +20,30 @@ class MainActivity : AppCompatActivity() {
             title = resources.getString(R.string.label_main_title)
         }
 
-        ProductClientAPI().findProducts({
-            products ->
-            if ((products != null) && products.isNotEmpty()){
-                mainBinding.rcProducts.apply {
-                    layoutManager = LinearLayoutManager(this@MainActivity)
-                    setHasFixedSize(true)
-                    itemAnimator = DefaultItemAnimator()
-                    adapter = ProductAdapter(products)
-                }
-            }
-        },{
-            error ->
-            Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT).show()
-        })
-
         mainBinding.fabAdd.setOnClickListener {
             view ->
             val intent = Intent(this,NewProductActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (ProductRepository()).listProducts({
+                products ->
+            mainBinding.rcProducts.apply {
+                adapter = ProductAdapter(products) { id,name,price ->
+                    val intent = Intent(this@MainActivity,EditProductActivity::class.java)
+                    intent.putExtra("productID", id)
+                    intent.putExtra("productName", name)
+                    intent.putExtra("productPrice", price)
+                    startActivity(intent)
+                }
+                layoutManager = LinearLayoutManager(applicationContext)
+            }
+        },{
+                msg ->
+            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+        })
     }
 }

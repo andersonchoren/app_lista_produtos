@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "834074647189",
+    "project_id": "app-produtos-57b84",
+    "storage_bucket": "app-produtos-57b84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834074647189:android:65854c5633d68b008c599c",
+        "android_client_info": {
+          "package_name": "br.com.andersonchoren.revisao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834074647189-njbsqged4hghj90hr1ffadrs114p74qg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOj_NzueSyziMchIIDftLECt1Ln0NcmHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834074647189-njbsqged4hghj90hr1ffadrs114p74qg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

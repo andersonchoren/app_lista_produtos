@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.andersonchoren.revisao.R
 
-class ProductAdapter(private val products:List<Product>) : RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
+class ProductAdapter(private val products:List<Product>,private val callback:(id:String,name:String,price:Long)->Unit) : RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
     class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvID:TextView = view.findViewById(R.id.tvID)
         val tvName:TextView = view.findViewById(R.id.tvName)
@@ -23,7 +23,10 @@ class ProductAdapter(private val products:List<Product>) : RecyclerView.Adapter<
         val product = products[position]
         holder.tvID.text = product.id.toString()
         holder.tvName.text = product.name
-        holder.tvPrice.text = String.format("R$ %.2f",product.price).replace(".",",")
+        holder.tvPrice.text = product.price.toString()
+        holder.itemView.setOnClickListener {
+            callback(product.id!!,product.name,product.price)
+        }
     }
 
     override fun getItemCount(): Int = products.size

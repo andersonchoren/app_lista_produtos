@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import br.com.andersonchoren.revisao.databinding.ActivityNewProductBinding
+import br.com.andersonchoren.revisao.model.Product
+import br.com.andersonchoren.revisao.repository.ProductRepository
 
 class NewProductActivity : AppCompatActivity() {
     private lateinit var newProductBinding: ActivityNewProductBinding
@@ -21,7 +24,18 @@ class NewProductActivity : AppCompatActivity() {
 
         newProductBinding.fabSave.setOnClickListener {
             view ->
+            val name = newProductBinding.edtName.text.toString()
+            val price = newProductBinding.edtPrice.text.toString().toLong()
 
+            val product = Product(name = name, price = price)
+
+            (ProductRepository()).insertProduct(product,{
+                msg ->
+                Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+            },{
+                    msg ->
+                Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+            })
         }
     }
 
